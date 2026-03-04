@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block title %}Admin Dashboard - ABC Library{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="mb-4">Admin Dashboard</h1>
+    
+    <div class="row mb-4">
+        <div class="col-md-3">
+            <div class="card border-purple">
+                <div class="card-body text-center">
+                    <h2>{{ total_users|default:"0" }}</h2>
+                    <p class="mb-0">Total Users</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-success">
+                <div class="card-body text-center">
+                    <h2>{{ total_books|default:"0" }}</h2>
+                    <p class="mb-0">Total Books</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-info">
+                <div class="card-body text-center">
+                    <h2>{{ active_loans|default:"0" }}</h2>
+                    <p class="mb-0">Active Loans</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-warning">
+                <div class="card-body text-center">
+                    <h2>{{ overdue_loans|default:"0" }}</h2>
+                    <p class="mb-0">Overdue Loans</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="alert alert-info">
+        <strong>Next steps:</strong> Add books/categories via Admin → Watch stats update live!
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+<nav class="navbar navbar-expand-lg abc-navbar">
+  <div class="container-fluid">
+    <a class="navbar-brand abc-brand" href="{% url 'catalog:home' %}">
+      📚 ABC Library
+    </a>
+
+    <div class="navbar-nav ms-auto">
+      {% if user.is_authenticated %}
+        <span class="navbar-text me-3 text-white">
+          Hi, {{ user.username }}
+        </span>
+        <a class="nav-link text-white" href="{% url 'dashboard:user' %}">Dashboard</a>
+        <a class="nav-link text-white" href="{% url 'accounts:logout' %}">Logout</a>
+      {% else %}
+        <a class="nav-link text-white" href="{% url 'accounts:register' %}">Register</a>
+        <a class="nav-link text-white" href="/admin/login/">Login</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}ABC Library{% endblock %}
+
+{% block content %}
+<!-- Hero -->
+<div class="jumbotron text-center py-5 bg-gradient text-white mb-5">
+    <h1 class="display-4 mb-3">ABC Library</h1>
+    <p class="lead mb-4">{{ total_books }} books available</p>
+    <a href="{% url 'catalog:book_list' %}" class="btn btn-light btn-lg me-3">Browse All Books</a>
+    <a href="/admin/" class="btn btn-outline-light btn-lg">Manage Library</a>
+</div>
+
+<!-- Featured Books -->
+<div class="container">
+    <h2 class="mb-4">Featured Books</h2>
+    <div class="row">
+        {% for book in featured_books %}
+        <div class="col-md-4 mb-4">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ book.title }}</h5>
+                    <p class="card-text text-muted">{{ book.author }}</p>
+                    <p class="text-purple">{{ book.category.name }}</p>
+                    <p class="small mb-2">{{ book.copies_available }}/{{ book.copies_total }} available</p>
+                    <a href="#" class="btn btn-primary btn-sm">View Details</a>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">
+                No books yet. <a href="/admin/catalog/book/add/">Add books in admin</a>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
