@@ -12,9 +12,10 @@
         <a class="nav-link text-white" href="{% url 'dashboard:user' %}">Dashboard</a>
         <a class="nav-link text-white" href="{% url 'accounts:logout' %}">Logout</a>
       {% else %}
+        <a class="nav-link text-white" href="{% url 'accounts:login' %}">Login</a>
         <a class="nav-link text-white" href="{% url 'accounts:register' %}">Register</a>
-        <a class="nav-link text-white" href="/admin/login/">Login</a>
       {% endif %}
+
     </div>
   </div>
 </nav>

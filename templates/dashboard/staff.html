@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block title %}Staff Dashboard - ABC Library{% endblock %}
+
+{% block content %}
+<div class="container py-4">
+  <h2 class="mb-3">Pending Requests</h2>
+  {% if pending_loans %}
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Book</th><th>User</th><th>Due</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for loan in pending_loans %}
+        <tr>
+          <td>{{ loan.book.title }}</td>
+          <td>{{ loan.member.username }}</td>
+          <td>{{ loan.due_on }}</td>
+          <td>
+            <a class="btn btn-success btn-sm" href="{% url 'circulation:approve_loan' loan.id %}">
+              Approve
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No pending requests.</p>
+  {% endif %}
+
+  <h2 class="mt-5 mb-3">Active Loans</h2>
+  {% if active_loans %}
+    <table class="table table-striped">
+      <thead>
+        <tr><th>Book</th><th>User</th><th>Due</th><th></th></tr>
+      </thead>
+      <tbody>
+        {% for loan in active_loans %}
+        <tr>
+          <td>{{ loan.book.title }}</td>
+          <td>{{ loan.member.username }}</td>
+          <td>{{ loan.due_on }}</td>
+          <td>
+            <a class="btn btn-primary btn-sm" href="{% url 'circulation:mark_returned' loan.id %}">
+              Mark Returned
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No active loans.</p>
+  {% endif %}
+</div>
+{% endblock %}

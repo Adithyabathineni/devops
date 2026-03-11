@@ -31,6 +31,8 @@ def user_dashboard(request):
 @login_required
 @role_required(['staff', 'admin'])
 def staff_dashboard(request):
+    pending = Loan.objects.filter(status="requested").select_related("book", "member")
+    active = Loan.objects.filter(status="active").select_related("book", "member")
     overdue_loans = Loan.objects.filter(status='overdue')[:10]
     total_books = Book.objects.count()
     total_categories = Category.objects.count()
@@ -39,6 +41,8 @@ def staff_dashboard(request):
         'overdue_loans': overdue_loans,
         'total_books': total_books,
         'total_categories': total_categories,
+        "pending_loans": pending,
+        "active_loans": active,
     }
     return render(request, 'dashboard/staff.html', context)
 
